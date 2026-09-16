@@ -21,6 +21,10 @@ Migrating an existing app: delete its `@custom-variant dark`, `@theme inline`,
 `:root`, `.dark` and brand `@layer base` blocks. This package provides all five.
 App-specific tokens stay in the app — Tailwind merges `@theme` blocks.
 
+If you use [knip](https://knip.dev), add `@slaclab/theme` to
+`ignoreDependencies`. knip does not follow CSS `@import`, so a CSS-only
+dependency always reads as unused.
+
 ## Palette
 
 Stanford's brand palette ([identity.stanford.edu](https://identity.stanford.edu/design-elements/color/)).
