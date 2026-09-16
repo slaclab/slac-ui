@@ -1,13 +1,19 @@
 {
-  "name": "@slaclab/theme",
-  "version": "0.1.0",
-  "description": "SLAC brand tokens for Tailwind 4",
+  "name": "@slaclab/ui",
+  "version": "0.2.0",
+  "description": "Shared SLAC frontend theme and tooling config",
   "license": "UNLICENSED",
   "repository": "github:slaclab/slac-ui",
   "files": [
-    "slac.css"
+    "slac.css",
+    "biome.json",
+    "tsconfig.json",
+    "tsconfig.node.json"
   ],
   "exports": {
-    "./slac.css": "./slac.css"
+    "./slac.css": "./slac.css",
+    "./biome": "./biome.json",
+    "./tsconfig.json": "./tsconfig.json",
+    "./tsconfig.node.json": "./tsconfig.node.json"
   }
 }

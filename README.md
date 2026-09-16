@@ -1,29 +1,59 @@
 # slac-ui
 
-Shared SLAC frontend theme. Tailwind 4 only.
-
-## Install
+Shared SLAC frontend theme and tooling config. Tailwind 4, Biome 2, TypeScript.
 
 ```bash
-bun add github:slaclab/slac-ui#v0.1.0
+bun add github:slaclab/slac-ui#v0.2.0
 ```
+
+## Theme
 
 ```css
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@slaclab/theme/slac.css";
+@import "@slaclab/ui/slac.css";
 ```
 
 Keep your own `@import "tailwindcss"`. Tailwind resolves source detection
 relative to the file holding that import, so it cannot come from here.
 
-Migrating an existing app: delete its `@custom-variant dark`, `@theme inline`,
-`:root`, `.dark` and brand `@layer base` blocks. This package provides all five.
+Migrating: delete the app's `@custom-variant dark`, `@theme inline`, `:root`,
+`.dark` and brand `@layer base` blocks. This package provides all five.
 App-specific tokens stay in the app — Tailwind merges `@theme` blocks.
 
-If you use [knip](https://knip.dev), add `@slaclab/theme` to
-`ignoreDependencies`. knip does not follow CSS `@import`, so a CSS-only
-dependency always reads as unused.
+## Biome
+
+```json
+{
+  "extends": ["@slaclab/ui/biome"],
+  "files": { "includes": ["**", "!**/dist/**/*"] }
+}
+```
+
+`files.includes` stays local; the paths are project-specific.
+
+## TypeScript
+
+```json
+{
+  "extends": "@slaclab/ui/tsconfig.json",
+  "compilerOptions": { "paths": { "@/*": ["./src/*"] } },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+
+`paths` and `include` must stay local. TypeScript resolves both relative to the
+file that declares them, so inheriting them would point into `node_modules` —
+`@/*` fails with TS2307 if you try.
+
+`@slaclab/ui/tsconfig.node.json` is the matching base for the Vite config project.
+
+## Not shareable
+
+`components.json` (shadcn) and `knip.json` have no `extends` mechanism, so their
+duplication stays. If you use knip, add `@slaclab/ui` to `ignoreDependencies` —
+knip does not follow CSS `@import`, so a CSS dependency always reads as unused.
 
 ## Palette
 
