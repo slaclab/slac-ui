@@ -1,21 +1,25 @@
 # slac-ui
 
-Shared SLAC frontend theme, as a [shadcn registry](https://ui.shadcn.com/docs/registry).
+Shared SLAC frontend theme. Tailwind 4 only.
 
 ## Install
 
-Add to `components.json`, then run the command. Requires Tailwind 4.
-
-```json
-"registries": { "@slac": "https://slaclab.github.io/slac-ui/r/{name}.json" }
-```
-
 ```bash
-npx shadcn add @slac/theme
+bun add github:slaclab/slac-ui#v0.1.0
 ```
 
-Migrating an existing app: delete its `:root`, `.dark` and brand `@layer base`
-rules first. `shadcn add` appends rather than replaces.
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@slaclab/theme/slac.css";
+```
+
+Keep your own `@import "tailwindcss"`. Tailwind resolves source detection
+relative to the file holding that import, so it cannot come from here.
+
+Migrating an existing app: delete its `@custom-variant dark`, `@theme inline`,
+`:root`, `.dark` and brand `@layer base` blocks. This package provides all five.
+App-specific tokens stay in the app — Tailwind merges `@theme` blocks.
 
 ## Palette
 
@@ -37,5 +41,5 @@ Logos are trademarks and are not distributed here.
 
 ## Editing
 
-`r/theme.json` is the whole registry. Every token in `light` needs one in `dark`
-except `radius`, or dark mode silently inherits the light value.
+Every token in `:root` needs one in `.dark` except `--radius`, or dark mode
+silently inherits the light value. Tag a release so consumers can pin it.

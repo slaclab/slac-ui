@@ -1,0 +1,13 @@
+{
+  "name": "@slaclab/theme",
+  "version": "0.1.0",
+  "description": "SLAC brand tokens for Tailwind 4",
+  "license": "UNLICENSED",
+  "repository": "github:slaclab/slac-ui",
+  "files": [
+    "slac.css"
+  ],
+  "exports": {
+    "./slac.css": "./slac.css"
+  }
+}
